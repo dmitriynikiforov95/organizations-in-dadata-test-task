@@ -1,0 +1,38 @@
+body {
+    margin:0;
+    padding:0;
+    font-family: "Lato";
+    font-size: 12px;
+    line-height: 23px;
+    background-color:#E5E5E5;
+}
+
+html {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  *, *:before, *:after {
+    -webkit-box-sizing: inherit;
+    -moz-box-sizing: inherit;
+    box-sizing: inherit;
+    }
+
+.pages-container {
+  max-width: 736px;
+  margin: 0 auto;
+}
+
+.app-title {
+margin-bottom: 34px;
+font-size: 40px;
+line-height: 49px;
+color: #2B2829;
+}
+
+.pages-content-container {
+  min-height: 568px;
+  padding:32px 24px;
+  margin-bottom: 203px;
+  background-color: #FFFFFF;
+}

@@ -1,0 +1,17 @@
+.container {
+    margin-bottom: 16px;
+    padding-top: 7px;
+    padding-left: 19px;
+}
+
+.container:hover {
+    background-color: #F8F8F8;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    max-width: 200px;
+}
+
+
