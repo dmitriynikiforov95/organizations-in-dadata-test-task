@@ -2,13 +2,13 @@ import React from "react";
 
 import s from "./organization.module.css";
 
-const Organization = props => {
+const Organization = ({organization}) => {
     return (
       <div class={s.container}>
-        <b>ООО “Пухлый буратино”</b>
+        <b>{organization.value}</b>
         <div class={s.wrapper}>
-          <span>789098768945</span>
-          <span>г. Санкт-Петербург </span>
+          <span>{organization.data.inn}</span>
+          <span>{organization.data.address.value} </span>
         </div>
       </div>
     );

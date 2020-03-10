@@ -1,7 +1,9 @@
 import React from "react";
+import { connect } from "react-redux";
 
 import SearchPanel from "../../search-panel";
-import OrganizationsList from "../../organizations-list";
+
+import OrganizationListContainer from "../../../containers/organization-list-container";
 
 const SearchHint = () => {
   return (
@@ -16,14 +18,28 @@ const SearchHint = () => {
   );
 };
 
-const OraganizationSearchPage = () => {
+
+const OraganizationSearchPage = ({searchPanelValue, foundOrganizations}) => {
+
+  const isSearchPanelValueEmpty =
+  searchPanelValue.query.length === 0
+    ? <SearchHint />
+    :  <OrganizationListContainer />;
+
   return (
     <div>
       <SearchPanel />
-      {/* <SearchHint /> */}
-      <OrganizationsList />
+      {isSearchPanelValueEmpty}
     </div>
   );
 };
 
-export default OraganizationSearchPage;
+
+const mapStateToProps = ({ searchPanelValue, foundOrganizations}) => {
+  return {
+    searchPanelValue,
+   foundOrganizations,
+  };
+};
+
+export default connect(mapStateToProps)(OraganizationSearchPage);

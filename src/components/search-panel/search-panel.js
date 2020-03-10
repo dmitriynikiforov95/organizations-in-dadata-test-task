@@ -22,7 +22,7 @@ class SearchPanel extends Component {
     const { searchPanelValue, changeQuery } = this.props;
     return (
       <div>
-        {/* rename */}
+        {/* rename class */}
         <p className={s.title}>Организация или ИП</p>
         <input
           value={searchPanelValue.query}
