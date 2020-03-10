@@ -1,6 +1,6 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import HomePage from "../pages/home-page";
+import OraganizationSearchPage from "../pages/organization-search-page";
 import NavTabs from "../nav-tabs";
 import "./app.css";
 
@@ -14,7 +14,7 @@ const App = () => {
       <NavTabs />
       <div className="pages-content-container">
       <Switch>
-        <Route path ="/" exact component={HomePage} />
+        <Route path ="/" exact component={OraganizationSearchPage} />
       </Switch>
       </div>
       </div>

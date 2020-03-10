@@ -1,7 +1,7 @@
 import React from "react";
 
 import SearchPanel from "../../search-panel";
-import OrganizationsList from "../../organizations-list/";
+import OrganizationsList from "../../organizations-list";
 
 const SearchHint = () => {
   return (
@@ -16,7 +16,7 @@ const SearchHint = () => {
   );
 };
 
-const HomePage = () => {
+const OraganizationSearchPage = () => {
   return (
     <div>
       <SearchPanel />
@@ -26,4 +26,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default OraganizationSearchPage;
