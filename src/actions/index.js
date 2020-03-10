@@ -10,4 +10,12 @@ const getOrganizations = suggestions => {
     payload: suggestions
   };
 };
-export { changeQuery, getOrganizations };
+
+const getОrganizationDetails = suggestion => {
+  return {
+    type: "ORGANIZATION_DETAILS_GETTED",
+    payload: suggestion
+  };
+};
+
+export { changeQuery, getOrganizations, getОrganizationDetails};

@@ -4,7 +4,7 @@ import OrganizationList from "../components/organization-list";
 
 
 const OrganizationListContainer = ({foundOrganizations}) => {
-    
+    if (foundOrganizations.length === 0) return null;
     return <OrganizationList organizations = {foundOrganizations} />
 }
 

@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 
 import SearchPanel from "../../search-panel";
 
+import OrganizationDetails from "../../organization-details/";
+
 import OrganizationListContainer from "../../../containers/organization-list-container";
 
 const SearchHint = () => {
@@ -18,27 +20,29 @@ const SearchHint = () => {
   );
 };
 
-
-const OraganizationSearchPage = ({searchPanelValue, foundOrganizations}) => {
+const OraganizationSearchPage = ({ searchPanelValue, foundOrganizations, isShowDetails }) => {
 
   const isSearchPanelValueEmpty =
-  searchPanelValue.query.length === 0
-    ? <SearchHint />
-    :  <OrganizationListContainer />;
+    searchPanelValue.query.length === 0 ? (
+      <SearchHint />
+    ) : null;
 
   return (
     <div>
       <SearchPanel />
       {isSearchPanelValueEmpty}
+      {(foundOrganizations.length === 1 && isShowDetails) ? (
+          <OrganizationDetails details={foundOrganizations[0]} />
+        ) : <OrganizationListContainer />}
     </div>
   );
 };
 
-
-const mapStateToProps = ({ searchPanelValue, foundOrganizations}) => {
+const mapStateToProps = ({ searchPanelValue, foundOrganizations, isShowDetails }) => {
   return {
     searchPanelValue,
-   foundOrganizations,
+    foundOrganizations,
+    isShowDetails
   };
 };
 
