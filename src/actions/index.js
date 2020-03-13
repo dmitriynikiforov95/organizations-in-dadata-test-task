@@ -24,5 +24,17 @@ const saveOrganization = organization => {
     payload: organization
   }
 }
+const deleteOrganization = organization => {
+  return {
+    type: "ORGANIZATION_DELETED",
+    payload: organization
+  }
+}
+// rename
+const toSavedOrganizationsPage = () => {
+  return {
+    type: "TO_SAVED-ORGANIZATIONS_PAGE",
+  }
+}
 
-export { changeQuery, getOrganizations, getОrganizationDetails, saveOrganization};
+export { changeQuery, getOrganizations, getОrganizationDetails, saveOrganization, deleteOrganization, toSavedOrganizationsPage};

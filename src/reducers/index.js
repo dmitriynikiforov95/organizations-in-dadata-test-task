@@ -5,7 +5,6 @@ const initalState = {
   isShowDetails: false
 };
 
-
 // refactoring
 const getОganizationDetails = (state, organization) => {
   const inn = organization.data.inn,
@@ -30,6 +29,21 @@ const saveOrganization = (state, organization) => {
     const newSavedOrganizations = [...savedOrganizations, organization];
     return newSavedOrganizations;
   }
+};
+
+const deleteOrganization = (state, organization) => {
+  const inn = organization.data.inn,
+    kpp = organization.data.kpp;
+
+  const idx = state.savedOrganizations.findIndex(
+    item => item.data.inn === inn && item.data.kpp === kpp
+  );
+
+  const newSavedOrganizations = [
+    ...state.savedOrganizations.slice(0, idx),
+    ...state.savedOrganizations.slice(idx + 1)
+  ];
+  return newSavedOrganizations;
 };
 
 const reducer = (state = initalState, action) => {
@@ -57,6 +71,18 @@ const reducer = (state = initalState, action) => {
       return {
         ...state,
         savedOrganizations: saveOrganization(state, action.payload)
+      };
+    case "ORGANIZATION_DELETED":
+      return {
+        ...state,
+        savedOrganizations: deleteOrganization(state, action.payload)
+      };
+    // rename case
+    case "TO_SAVED-ORGANIZATIONS_PAGE":
+      return {
+        ...state,
+        searchPanelValue: { query: "" },
+        foundOrganizations: []
       };
     default:
       return state;
