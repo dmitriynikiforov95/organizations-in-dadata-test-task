@@ -4,9 +4,14 @@ import { connect } from "react-redux";
 import {saveOrganization} from "../../actions/";
 import s from "./organization-details.module.css";
 
-const OrganizationDetails = ({organization, saveOrganization}) => {
+const OrganizationDetails = ({organization, saveOrganization, isSavedOrganizationDetailsShowed}) => {
 
   const {value, data: {inn, kpp, ogrn, management, address}} = organization;
+
+
+  const saveBtn = <button type="button" onClick={() => saveOrganization(organization)}>
+  Сохранить
+</button>
 
   return (
     <div>
@@ -20,15 +25,20 @@ const OrganizationDetails = ({organization, saveOrganization}) => {
         <li>{kpp}</li>
         <li>{ogrn}</li>
       </ul>
-      <button type="button" onClick={() => saveOrganization(organization)}>
-        Сохранить
-      </button>
+      {isSavedOrganizationDetailsShowed ? null : saveBtn}
     </div>
   );
-};
+}
+
+
+const mapStateToProps = ({organizationDetails}) => {
+  return {
+    isSavedOrganizationDetailsShowed: organizationDetails.isSavedOrganizationDetailsShowed
+  }
+}
 
 const mapDispatchToProps = {
   saveOrganization
 }
 
-export default connect(null, mapDispatchToProps)(OrganizationDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(OrganizationDetails);

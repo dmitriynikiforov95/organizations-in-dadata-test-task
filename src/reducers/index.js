@@ -2,7 +2,8 @@ const initalState = {
   searchPanelValue: { query: "" },
   foundOrganizations: [],
   savedOrganizations: [],
-  isShowDetails: false
+  isShowDetails: false,
+  organizationDetails: {isSavedOrganizationDetailsShowed: false, details: null}
 };
 
 // refactoring
@@ -82,8 +83,21 @@ const reducer = (state = initalState, action) => {
       return {
         ...state,
         searchPanelValue: { query: "" },
-        foundOrganizations: []
+        foundOrganizations: [],
+        isShowDetails: false,
+        organizationDetails: {
+          isSavedOrganizationDetailsShowed: false,
+          details: null
+        }   
       };
+      case "SAVED_ORGANIZATION_DETAILS_SHOWED":
+        return {
+          ...state,
+          organizationDetails: {
+            isSavedOrganizationDetailsShowed: true,
+            details: action.payload
+          }   
+        }
     default:
       return state;
   }

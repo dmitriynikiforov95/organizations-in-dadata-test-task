@@ -7,7 +7,7 @@ const SavedOrganizationList = ({ savedOrganizations }) => {
   if (savedOrganizations.length === 0)
     return <p>Сохраненные организации отсутствуют</p>;
     
-  return <OrganizationList organizations={savedOrganizations} hasDeleteOrganizationBtn={true} />;
+  return <OrganizationList organizations={savedOrganizations} isSavedOrganizationList={true}/>;
 };
 
 const mapStateToProps = ({ savedOrganizations }) => {
