@@ -20,25 +20,35 @@ const SearchHint = () => {
   );
 };
 
-const OraganizationSearchPage = ({ searchPanelValue, foundOrganizations, isShowDetails }) => {
-
+const OraganizationSearchPage = ({
+  searchPanelValue,
+  foundOrganizations,
+  isShowDetails
+}) => {
   const isSearchPanelValueEmpty =
-    searchPanelValue.query.length === 0 ? (
-      <SearchHint />
-    ) : null;
+    searchPanelValue.query.length === 0 ? <SearchHint /> : null;
+    
+  const pageContent =
+    foundOrganizations.length === 1 && isShowDetails ? (
+      <OrganizationDetails organization={foundOrganizations[0]} />
+    ) : (
+      <OrganizationListContainer />
+    );
 
   return (
     <div>
       <SearchPanel />
       {isSearchPanelValueEmpty}
-      {(foundOrganizations.length === 1 && isShowDetails) ? (
-          <OrganizationDetails details={foundOrganizations[0]} />
-        ) : <OrganizationListContainer />}
+      {pageContent}
     </div>
   );
 };
 
-const mapStateToProps = ({ searchPanelValue, foundOrganizations, isShowDetails }) => {
+const mapStateToProps = ({
+  searchPanelValue,
+  foundOrganizations,
+  isShowDetails
+}) => {
   return {
     searchPanelValue,
     foundOrganizations,

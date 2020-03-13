@@ -1,29 +1,36 @@
 const initalState = {
   searchPanelValue: { query: "" },
-  foundOrganizations:[],
+  foundOrganizations: [],
+  savedOrganizations: [],
   isShowDetails: false
 };
 
 
-// const getОganizationDetails = (organizations, organization) => {
-//   const inn = organization.organizations.inn,
-//     kpp = organization.organizations.kpp;
-//   const showedOrganization = organizations.foundOrganizations.filter(item => {
-//     return item.organizations.inn == inn && item.organizations.kpp == kpp;
-//   });
-//   return showedOrganization;
-// };
-
-
-const getОganizationDetails = (data, organization) => {
+// refactoring
+const getОganizationDetails = (state, organization) => {
   const inn = organization.data.inn,
     kpp = organization.data.kpp;
-  const newShowedOrganization = data.foundOrganizations.filter(item => {
-    return item.data.inn == inn && item.data.kpp == kpp;
+  const newShowedOrganization = state.foundOrganizations.filter(item => {
+    return item.data.inn === inn && item.data.kpp === kpp;
   });
   return newShowedOrganization;
 };
 
+const saveOrganization = (state, organization) => {
+  const inn = organization.data.inn,
+    kpp = organization.data.kpp;
+  if (
+    state.savedOrganizations.find(
+      item => item.data.inn === inn && item.data.kpp === kpp
+    )
+  ) {
+    return state.savedOrganizations;
+  } else {
+    const savedOrganizations = state.savedOrganizations;
+    const newSavedOrganizations = [...savedOrganizations, organization];
+    return newSavedOrganizations;
+  }
+};
 
 const reducer = (state = initalState, action) => {
   switch (action.type) {
@@ -35,16 +42,21 @@ const reducer = (state = initalState, action) => {
         },
         isShowDetails: false
       };
-      case "ORGANIZATIONS_GETTED":
-        return {
-          ...state,
-          foundOrganizations: action.payload
-        };
-        case "ORGANIZATION_DETAILS_GETTED":
+    case "ORGANIZATIONS_GETTED":
+      return {
+        ...state,
+        foundOrganizations: action.payload
+      };
+    case "ORGANIZATION_DETAILS_GETTED":
       return {
         ...state,
         foundOrganizations: getОganizationDetails(state, action.payload),
-        isShowDetails: true,
+        isShowDetails: true
+      };
+    case "ORGANIZATION_SAVED":
+      return {
+        ...state,
+        savedOrganizations: saveOrganization(state, action.payload)
       };
     default:
       return state;

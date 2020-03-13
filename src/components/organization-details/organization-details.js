@@ -1,11 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 
+import {saveOrganization} from "../../actions/";
 import s from "./organization-details.module.css";
 
-const OrganizationDetails = ({details}) => {
+const OrganizationDetails = ({organization, saveOrganization}) => {
 
-  const {value, data: {inn, kpp, ogrn, management, address}} = details;
+  const {value, data: {inn, kpp, ogrn, management, address}} = organization;
 
   return (
     <div>
@@ -19,11 +20,15 @@ const OrganizationDetails = ({details}) => {
         <li>{kpp}</li>
         <li>{ogrn}</li>
       </ul>
-      <button type="button">
+      <button type="button" onClick={() => saveOrganization(organization)}>
         Сохранить
       </button>
     </div>
   );
 };
 
-export default connect()(OrganizationDetails);
+const mapDispatchToProps = {
+  saveOrganization
+}
+
+export default connect(null, mapDispatchToProps)(OrganizationDetails);

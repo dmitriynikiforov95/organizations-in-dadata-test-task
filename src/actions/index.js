@@ -4,18 +4,25 @@ const changeQuery = query => {
     payload: query
   };
 };
-const getOrganizations = suggestions => {
+const getOrganizations = organizations => {
   return {
     type: "ORGANIZATIONS_GETTED",
-    payload: suggestions
+    payload: organizations
   };
 };
 
-const getОrganizationDetails = suggestion => {
+const getОrganizationDetails = organization => {
   return {
     type: "ORGANIZATION_DETAILS_GETTED",
-    payload: suggestion
+    payload: organization
   };
 };
 
-export { changeQuery, getOrganizations, getОrganizationDetails};
+const saveOrganization = organization => {
+  return {
+    type: "ORGANIZATION_SAVED",
+    payload: organization
+  }
+}
+
+export { changeQuery, getOrganizations, getОrganizationDetails, saveOrganization};
