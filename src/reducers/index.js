@@ -1,50 +1,51 @@
+
+const savedOrganizations = localStorage.getItem("organizations")
+  ? JSON.parse(localStorage.getItem("organizations"))
+  : [];
+
 const initalState = {
   searchPanelValue: { query: "" },
-  foundOrganizations: [],
-  savedOrganizations: [],
-  isShowDetails: false,
-  organizationDetails: {isSavedOrganizationDetailsShowed: false, details: null}
+  isQueryResultloading: null,
+  organizations: [],
+  savedOrganizations: savedOrganizations,
+  isShowOrganizationDetails: false,
 };
 
-// refactoring
-const getОganizationDetails = (state, organization) => {
-  const inn = organization.data.inn,
-    kpp = organization.data.kpp;
-  const newShowedOrganization = state.foundOrganizations.filter(item => {
-    return item.data.inn === inn && item.data.kpp === kpp;
-  });
-  return newShowedOrganization;
-};
 
 const saveOrganization = (state, organization) => {
-  const inn = organization.data.inn,
-    kpp = organization.data.kpp;
-  if (
-    state.savedOrganizations.find(
-      item => item.data.inn === inn && item.data.kpp === kpp
-    )
-  ) {
-    return state.savedOrganizations;
-  } else {
-    const savedOrganizations = state.savedOrganizations;
-    const newSavedOrganizations = [...savedOrganizations, organization];
-    return newSavedOrganizations;
+
+  if (state.savedOrganizations.find(({ data: { hid } }) => hid === organization.data.hid)) {
+    return state;
   }
+
+  const savedOrganizations = [organization, ...state.savedOrganizations];
+
+  localStorage.setItem("organizations", JSON.stringify(savedOrganizations));
+
+  return {
+    ...state,
+    savedOrganizations,
+  };
 };
 
 const deleteOrganization = (state, organization) => {
-  const inn = organization.data.inn,
-    kpp = organization.data.kpp;
-
-  const idx = state.savedOrganizations.findIndex(
-    item => item.data.inn === inn && item.data.kpp === kpp
+  const savedOrganizations = state.savedOrganizations.filter(
+    ({ data: { hid } }) => hid !== organization.data.hid
   );
 
-  const newSavedOrganizations = [
-    ...state.savedOrganizations.slice(0, idx),
-    ...state.savedOrganizations.slice(idx + 1)
-  ];
-  return newSavedOrganizations;
+  localStorage.setItem("organizations", JSON.stringify(savedOrganizations));
+
+  return {
+    ...state,
+    savedOrganizations,
+  };
+};
+
+const getОganizationDetails = (state, organization) => {
+  const newShowedOrganization = state.organizations.filter(
+    ({ data: { hid } }) => hid === organization.data.hid
+  );
+  return newShowedOrganization;
 };
 
 const reducer = (state = initalState, action) => {
@@ -52,52 +53,29 @@ const reducer = (state = initalState, action) => {
     case "QUERY_CHANGED":
       return {
         ...state,
+        isQueryResultloading: true,
         searchPanelValue: {
-          query: action.payload
+          query: action.payload,
         },
-        isShowDetails: false
+        isShowOrganizationDetails: false,
       };
+
     case "ORGANIZATIONS_GETTED":
       return {
         ...state,
-        foundOrganizations: action.payload
-      };
-    case "ORGANIZATION_DETAILS_GETTED":
-      return {
-        ...state,
-        foundOrganizations: getОganizationDetails(state, action.payload),
-        isShowDetails: true
-      };
+        organizations: action.payload,
+        isQueryResultloading: false,
+      }
     case "ORGANIZATION_SAVED":
-      return {
-        ...state,
-        savedOrganizations: saveOrganization(state, action.payload)
-      };
+      return saveOrganization(state, action.payload);
     case "ORGANIZATION_DELETED":
-      return {
-        ...state,
-        savedOrganizations: deleteOrganization(state, action.payload)
-      };
-    // rename case
-    case "TO_SAVED-ORGANIZATIONS_PAGE":
-      return {
-        ...state,
-        searchPanelValue: { query: "" },
-        foundOrganizations: [],
-        isShowDetails: false,
-        organizationDetails: {
-          isSavedOrganizationDetailsShowed: false,
-          details: null
-        }   
-      };
-      case "SAVED_ORGANIZATION_DETAILS_SHOWED":
+      return deleteOrganization(state, action.payload);
+      case "ORGANIZATION_DETAILS_GETTED":
         return {
           ...state,
-          organizationDetails: {
-            isSavedOrganizationDetailsShowed: true,
-            details: action.payload
-          }   
-        }
+          organizations: getОganizationDetails(state, action.payload),
+          isShowOrganizationDetails: true,
+        };
     default:
       return state;
   }

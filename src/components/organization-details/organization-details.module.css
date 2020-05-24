@@ -3,3 +3,41 @@ font-size: 24px;
 line-height: 45px;
 color: #2B2829;
 }
+
+.btn{
+display: block;
+padding: 10px 0;
+width: 182px;
+background: #F50634;
+border-radius: 3px;
+}
+
+.btnText {
+position: relative;
+font-size: 18px;
+line-height: 126.39%;
+text-align: center;
+color: #FFFFFF;
+}
+
+.activeBtn {
+    background: none;
+    border:none;
+}
+.btn:active, .btn:focus, .activeBtn:active, .activeBtn:focus { outline: none; }
+
+.activeBtn .btnText {
+    color: #B9B9B9;
+}
+
+.activeBtn .btnText::before {
+    content: "";
+    position: absolute;
+    top: 3.5px;
+    left: -25px;
+    width: 16px;
+    height: 12.8px;
+    background-image: url(./check-mark.png);
+    background-repeat: no-repeat;
+    background-position: 0 0
+}

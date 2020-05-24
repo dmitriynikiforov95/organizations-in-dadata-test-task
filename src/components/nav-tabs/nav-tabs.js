@@ -1,31 +1,32 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {toSavedOrganizationsPage} from "../../actions/";
-import {connect} from "react-redux";
 
 import s from "./nav-tabs.module.css";
 
-const NavTabs = ({savedOrganizations, toSavedOrganizationsPage}) => {
-  const clazz = s.btn + " " + s.activeBtn;
+const NavTabs = ({ navTabs, activeTab, setActiveTab, savedOrganizations }) => {
+
+  const savedOrganizationsLength = <span className={`${s.savedOrganizationsLength} ${
+    activeTab === "saved-organizations" && s.activeSavedOrganizationsLength
+    }`}> ({savedOrganizations.length})</span>;
+
   return (
     <nav>
-      <Link to="/">
-        <button type="button" className={clazz}><span className={s.btnActiveText}>Новая организация</span></button>
-      </Link>
-      <Link to="/saved-organizations" onClick={toSavedOrganizationsPage}>
-      <button type="button" className={s.btn}><span className={s.btnText}>Сохраненные организации ({savedOrganizations.length}) </span></button></Link>
+      {navTabs.map(({ text, value, link }) => (
+        <Link to={link}>
+          <button type="button"
+            onClick={() => setActiveTab(value)}
+            className={`${s.btn} ${
+              activeTab === value ? s.activeBtn : ""
+              }`}>
+            <span className={`${s.text} ${
+              activeTab === value ? s.activeText : ""
+              }`}>
+              {text[0].toUpperCase() + text.slice(1)}{value === "saved-organizations" && savedOrganizationsLength}
+            </span></button>
+        </Link>
+      ))}
     </nav>
   );
 };
 
-const mapStateToProps = ({savedOrganizations}) => {
-  return {
-    savedOrganizations
-  }
-}
-
-const mapDispatchToProps = {
-  toSavedOrganizationsPage
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(NavTabs);
+export default NavTabs;

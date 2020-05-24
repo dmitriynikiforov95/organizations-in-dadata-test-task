@@ -1,9 +1,13 @@
 import React from "react";
-import SavedOrganizationList from "../../saved-organizations/";
+import OrganizationList from "../../organization-list";
 
-const SavedOrganizationsPage = () => {
-
-  return <SavedOrganizationList/>;
+const SavedOrganizationsPage = ({ savedOrganizations }) => {
+  return (
+    <OrganizationList
+      organizations={savedOrganizations}
+      isSavedOrganizationList={true}
+    />
+  );
 };
 
 export default SavedOrganizationsPage;

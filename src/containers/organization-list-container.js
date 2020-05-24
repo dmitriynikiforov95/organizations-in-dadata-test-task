@@ -3,14 +3,14 @@ import {connect} from "react-redux";
 import OrganizationList from "../components/organization-list";
 
 
-const OrganizationListContainer = ({foundOrganizations}) => {
-    if (foundOrganizations.length === 0) return null;
-    return <OrganizationList organizations = {foundOrganizations} />
+const OrganizationListContainer = ({organizations}) => {
+    if (organizations.length === 0) return null;
+    return <OrganizationList organizations = {organizations} />
 }
 
-const mapStateToProps = ({foundOrganizations}) => {
+const mapStateToProps = ({organizations}) => {
     return {
-        foundOrganizations
+        organizations
     }
 }
 

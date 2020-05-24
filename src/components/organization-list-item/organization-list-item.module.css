@@ -1,0 +1,35 @@
+.container {
+    margin-bottom: 16px;
+    padding-top: 7px;
+    padding-left: 19px;
+    padding-right: 5px;
+}
+
+.container:hover {
+    background-color: #F8F8F8;
+}
+
+.organizationDetail {
+    margin-right:15px;
+}
+
+.valueContainer {
+  display: flex;
+    justify-content: space-between;
+}
+.moreDetailsContainer {
+    cursor: pointer;
+}
+
+.moreDetailsText {
+    margin-right: 5px;
+}
+.arrow {
+    transition: transform 0.4s;
+}
+.trashCan {
+    cursor: pointer;
+}
+.arrowActive {
+    transform: rotate(180deg);
+}

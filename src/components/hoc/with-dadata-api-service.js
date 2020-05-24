@@ -2,7 +2,6 @@ import React from "react";
 
 import {DadataApiServiceConsumer} from "../dadata-api-service-context/";
 
-
 const withDadataApiService = Wrapped => {
     return props => {
         return (
@@ -15,5 +14,7 @@ const withDadataApiService = Wrapped => {
       };
 }
 
-export default withDadataApiService;
+export {
+  withDadataApiService,
+};
 
