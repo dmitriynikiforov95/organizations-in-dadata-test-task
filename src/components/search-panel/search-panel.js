@@ -9,7 +9,7 @@ const SearchPanel = ({query, changeQuery, searchPanelRef}) => {
         <DebounceInput
           debounceTimeout={600}
           value={query}
-          ref={searchPanelRef}
+          inputRef={searchPanelRef}
           type="text"
           placeholder="Введите название, ИНН или адрес организации"
           className={s.searchPanel}

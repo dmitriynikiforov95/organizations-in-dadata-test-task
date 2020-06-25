@@ -13,8 +13,8 @@ import { CSSTransition } from "react-transition-group";
 const App = () => {
   
   const routes = [
-    { path: '/', Component: OraganizationSearchPageContainer },
-    { path: '/saved-organizations', Component: SavedOrganizationsPageContainer },
+    { path: '/organizations-in-dadata', Component: OraganizationSearchPageContainer },
+    { path: '/organizations-in-dadata/saved-organizations', Component: SavedOrganizationsPageContainer },
   ]
 
   return (

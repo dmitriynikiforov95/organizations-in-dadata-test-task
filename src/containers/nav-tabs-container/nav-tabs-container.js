@@ -9,7 +9,7 @@ const NavTabsContainer = ({ savedOrganizations }) => {
   const location = useLocation();
 
   const selectedPage =
-   (location.pathname === "/saved-organizations")
+   (location.pathname === "/organizations-in-dadata/saved-organizations")
       ? "saved-organizations"
       : "organizations-search";
 
@@ -19,12 +19,12 @@ const NavTabsContainer = ({ savedOrganizations }) => {
     {
       text: "новая организация",
       value: "organizations-search",
-      link: "/",
+      link:"/organizations-in-dadata"
     },
     {
       text: "сохраненные организации",
       value: "saved-organizations",
-      link: "/saved-organizations",
+      link: "/organizations-in-dadata/saved-organizations",
     },
   ];
 

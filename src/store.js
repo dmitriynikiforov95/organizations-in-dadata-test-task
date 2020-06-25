@@ -42,7 +42,7 @@ const store = createStore(
 
 store.subscribe(throttle(() => {
   saveState(store.getState().savedOrganizations);
-}, 5000))
+}, 1000))
 
 
 export default store;

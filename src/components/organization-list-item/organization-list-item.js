@@ -90,7 +90,7 @@ const OrganizationListItem = ({
       <div className={orgNameContainerClazz}>
         <b className={orgNameTextClazz}>{organization.value}</b>
        {!isSavedOrganizationList && <p>
-        <span className={orgNameTextClazz}>{organization.data.inn}</span>
+        <span className={orgNameTextClazz + " " + s.orgInn}>{organization.data.inn}</span>
         <span className={orgNameTextClazz}>{organization.data.address.data.city_with_type}</span>
        </p>}
         {isSavedOrganizationList && (
