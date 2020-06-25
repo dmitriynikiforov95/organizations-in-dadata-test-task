@@ -1,6 +1,6 @@
-import React  from "react";
-
+import React from "react";
 import s from "./organization-details.module.css";
+import classNames from "classnames/bind";
 
 const OrganizationDetails = ({
   organization,
@@ -12,9 +12,14 @@ const OrganizationDetails = ({
     data: { inn, kpp, ogrn, management, address },
   } = organization;
 
+  const cx = classNames.bind(s);
+
   const saveOrganizationBtn = (
     <button
-      className={`${s.btn} ${isOrganizationSaved && s.activeBtn}`}
+      className={cx({
+        btn: true,
+        activeBtn: isOrganizationSaved,
+      })}
       type="button"
       onClick={() => saveOrganization(organization)}
     >
@@ -24,22 +29,37 @@ const OrganizationDetails = ({
     </button>
   );
   return (
-    <div>
+    <>
       <h2 className={s.title}>{value}</h2>
-      <b>Юридический адрес</b>
-      <div>{address.unrestricted_value}</div>
-      {management?.name && (
-        <>
-          <b>Генеральный директор</b> <div>{management.name}</div>
-        </>
-      )}
-      <ul>
-        <li>{inn}</li>
-        <li>{kpp}</li>
-        <li>{ogrn}</li>
-      </ul>
+      <div className={s.OrganizationDetailsWrapper}>
+        <p className={s.managementInfo}>
+          <p className={s.addressWrapper}>
+          <b>Юридический адрес</b>
+          <br></br>
+          {address?.unrestricted_value}
+          </p>
+          {management?.name && (
+            <p className={s.generalManagerWrapper}>
+              <b>Генеральный директор</b>
+              <br></br>
+              {management.name}
+            </p>
+          )}
+        </p>
+        <ul className={s.identifierList}>
+          <li className={s.identifierItem}>
+            <strong>{"инн".toUpperCase()}</strong> {inn}
+          </li>
+          <li className={s.identifierItem}>
+            <strong>{"кпп".toUpperCase()} </strong> {kpp}
+          </li>
+          <li className={s.identifierItem}>
+            <strong>{"огрн".toUpperCase()} </strong> {ogrn}
+          </li>
+        </ul>
+      </div>
       {saveOrganizationBtn}
-    </div>
+    </>
   );
 };
 

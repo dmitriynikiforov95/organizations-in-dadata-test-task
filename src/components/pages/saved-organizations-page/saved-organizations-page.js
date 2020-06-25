@@ -1,12 +1,16 @@
 import React from "react";
 import OrganizationList from "../../organization-list";
+import SearchHint from './../../search-hint/index';
 
 const SavedOrganizationsPage = ({ savedOrganizations }) => {
   return (
-    <OrganizationList
-      organizations={savedOrganizations}
-      isSavedOrganizationList={true}
-    />
+    <>
+      {savedOrganizations.length === 0 && <SearchHint isSavedOrganizationsPage={true} />}
+      <OrganizationList
+        organizations={savedOrganizations}
+        isSavedOrganizationList={true}
+      />
+    </>
   );
 };
 

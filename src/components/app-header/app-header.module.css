@@ -1,17 +1,18 @@
 .header {
-    min-height: 64px;
+    margin-bottom: 55px;
     background-color: #FFFFFF;
 }
 
 .container {
     max-width:1040px;
-    padding: 16px 0px;
+    padding: 14px 0px;
     margin:0 auto;
-    text-align: center
 }
 
-.logoWrapper {
+.logo {
+    display: block;
     width: 52px;
+    height:48px;
     margin: 0 auto;
 }
 

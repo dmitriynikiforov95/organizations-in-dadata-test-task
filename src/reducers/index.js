@@ -1,81 +1,66 @@
 
-const savedOrganizations = localStorage.getItem("organizations")
-  ? JSON.parse(localStorage.getItem("organizations"))
-  : [];
+const EQUALITY = "equality";
 
-const initalState = {
-  searchPanelValue: { query: "" },
-  isQueryResultloading: null,
-  organizations: [],
-  savedOrganizations: savedOrganizations,
-  isShowOrganizationDetails: false,
-};
+const searchOrganizationById = (organization, condition) => ({ data: { hid } }) =>
+  (condition === "equality") ? hid === organization.data.hid : hid !== organization.data.hid;
 
+const getОganizationDetails = (organizations, organization) =>
+  organizations.filter(searchOrganizationById(organization, EQUALITY))
 
-const saveOrganization = (state, organization) => {
+const saveOrganization = (savedOrganizations, organization) => {
 
-  if (state.savedOrganizations.find(({ data: { hid } }) => hid === organization.data.hid)) {
-    return state;
+  if (savedOrganizations.find(searchOrganizationById(organization, EQUALITY))) {
+    return savedOrganizations;
   }
 
-  const savedOrganizations = [organization, ...state.savedOrganizations];
-
-  localStorage.setItem("organizations", JSON.stringify(savedOrganizations));
-
-  return {
-    ...state,
-    savedOrganizations,
-  };
+  return [organization, ...savedOrganizations];
 };
 
-const deleteOrganization = (state, organization) => {
-  const savedOrganizations = state.savedOrganizations.filter(
-    ({ data: { hid } }) => hid !== organization.data.hid
-  );
+const removeOrganization = (savedOrganizations, organization) =>
+  savedOrganizations.filter(searchOrganizationById(organization))
 
-  localStorage.setItem("organizations", JSON.stringify(savedOrganizations));
-
-  return {
-    ...state,
-    savedOrganizations,
-  };
-};
-
-const getОganizationDetails = (state, organization) => {
-  const newShowedOrganization = state.organizations.filter(
-    ({ data: { hid } }) => hid === organization.data.hid
-  );
-  return newShowedOrganization;
-};
-
-const reducer = (state = initalState, action) => {
+const reducer = (state, action) => {
   switch (action.type) {
-    case "QUERY_CHANGED":
+    case "ORGANIZATIONS_FETCH_REQUEST":
       return {
         ...state,
-        isQueryResultloading: true,
+        isOrganizationsLoading: true,
         searchPanelValue: {
           query: action.payload,
         },
         isShowOrganizationDetails: false,
       };
-
-    case "ORGANIZATIONS_GETTED":
+    case "ORGANIZATIONS_FETCH_SUCCESS":
       return {
         ...state,
         organizations: action.payload,
-        isQueryResultloading: false,
+        isOrganizationsLoading: false,
+      }
+    case "ORGANIZATIONS_FETCH_FAILURE":
+      return {
+        ...state,
+        organizationsError: action.payload,
+        isOrganizationsLoading: false,
       }
     case "ORGANIZATION_SAVED":
-      return saveOrganization(state, action.payload);
-    case "ORGANIZATION_DELETED":
-      return deleteOrganization(state, action.payload);
-      case "ORGANIZATION_DETAILS_GETTED":
-        return {
-          ...state,
-          organizations: getОganizationDetails(state, action.payload),
-          isShowOrganizationDetails: true,
-        };
+      return {
+        ...state,
+        savedOrganizations: saveOrganization(state.savedOrganizations, action.payload)
+      }
+    case "ORGANIZATION_REMOVED_FROM_SAVED":
+      return {
+        ...state,
+        savedOrganizations: removeOrganization(state.savedOrganizations, action.payload)
+      }
+    case "ORGANIZATION_DETAILS_GETTED":
+      return {
+        ...state,
+        searchPanelValue: {
+          query: action.payload.value,
+        },
+        organizations: getОganizationDetails(state.organizations, action.payload),
+        isShowOrganizationDetails: true,
+      };
     default:
       return state;
   }

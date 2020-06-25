@@ -1,43 +1,100 @@
+.OrganizationDetailsWrapper {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  line-height: 188.55%;
+}
+
 .title {
-font-size: 24px;
-line-height: 45px;
-color: #2B2829;
+  margin: 0;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  font-size: 24px;
+  line-height: 45px;
+  color: #2b2829;
+  border-bottom: 1px solid #dfdfdf;
 }
 
-.btn{
-display: block;
-padding: 10px 0;
-width: 182px;
-background: #F50634;
-border-radius: 3px;
+.managementInfo {
+  margin: 0;
 }
 
-.btnText {
-position: relative;
-font-size: 18px;
-line-height: 126.39%;
-text-align: center;
-color: #FFFFFF;
+.addressWrapper {
+  max-width: 450px;
+  margin: 0;
+  margin-bottom: 5px;
+  word-break: break-word;
 }
 
-.activeBtn {
-    background: none;
-    border:none;
+.generalManagerWrapper {
+  margin: 0;
+  margin-bottom: 5px;
 }
-.btn:active, .btn:focus, .activeBtn:active, .activeBtn:focus { outline: none; }
 
-.activeBtn .btnText {
-    color: #B9B9B9;
+.btn {
+  display: block;
+  padding: 12px 24px;
+  background: #f50634;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.2s ease-in;
 }
 
 .activeBtn .btnText::before {
-    content: "";
-    position: absolute;
-    top: 3.5px;
-    left: -25px;
-    width: 16px;
-    height: 12.8px;
-    background-image: url(./check-mark.png);
-    background-repeat: no-repeat;
-    background-position: 0 0
+  content: "";
+  position: absolute;
+  top: 3.5px;
+  left: -25px;
+  width: 16px;
+  height: 12.8px;
+  opacity: 0;
+  background-image: url(./check-mark.png);
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  transition: opacity 0.4s;
+}
+
+.activeBtn .btnText::before {
+  opacity: 1;
+}
+
+.btnText {
+  position: relative;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 126.39%;
+  text-align: center;
+  color: #ffffff;
+}
+
+.activeBtn {
+  background: none;
+  border: none;
+  cursor: default;
+}
+
+.btn:active,
+.btn:focus,
+.activeBtn:active,
+.activeBtn:focus {
+  outline: none;
+}
+
+.activeBtn .btnText {
+  color: #b9b9b9;
+}
+
+.identifierList {
+  padding: 24px;
+  margin: 0;
+  list-style: none;
+  background: #f8f8f8;
+  border-radius: 3px;
+}
+
+.identifierItem {
+  padding: 0;
+  font-size: 14px;
+  line-height: 188.55%;
 }

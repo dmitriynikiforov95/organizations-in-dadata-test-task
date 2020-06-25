@@ -1,6 +1,6 @@
 export default class DadataApiService {
-    
-  _apiBase =
+
+    _apiBase =
     "https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/party";
 
   async getResource(query) {
@@ -21,7 +21,7 @@ export default class DadataApiService {
     return await res.json();
   }
 
-  getOrganizations(query) {
+  fetchOrganizations(query) {
     return this.getResource(query);
   }
 }

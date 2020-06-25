@@ -1,31 +1,36 @@
 
 
-.btn {
+.tab {
     padding-top:8px;
     padding-bottom:12px;
     padding-left:24px;
     padding-right:25px;
     background-color:#E5E5E5;
     border:none;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 200ms ease-in;
 }
-.text {
+
+.tabText {
     color: #B9B9B9;
+    transition: color 200ms ease-in;
 }
-.activeBtn {
+.tabActiveText {
     font-weight: bold;
+}
+
+.activeTab {
     border-top: 2px solid #F50634;
     background-color:#FFFFFF;
-    outline: none;
 }
-.btn:active, .btn:focus { outline: none; }
 
-.activeText {
+.tab:active, .tab:focus { outline: none; }
+
+.tabActiveText, .savedOrganizationsLength {
     color: #2B2829;
 }
 
-.savedOrganizationsLength {
-    color: #2B2829;
-}
 .activeSavedOrganizationsLength {
     color:#F50634;
 }

@@ -2,14 +2,18 @@ import React from "react";
 
 import SearchPanelContainer from "../../../containers/search-panel-container";
 
-const OraganizationSearchPage = ({pageContent, searchPanelRef}) => {
-
+const OraganizationSearchPage = ({spinner, errorMessage, resultHint, pageContent, organizationDetails, searchPanelRef}) => {
+  
   return (
-    <div>
-      <SearchPanelContainer searchPanelRef={searchPanelRef} />
-      {pageContent}
-    </div>
-  );
+    <>
+    <SearchPanelContainer searchPanelRef={searchPanelRef} />
+     {spinner}
+    {errorMessage}
+    {resultHint}
+    {pageContent} 
+    {organizationDetails}
+    </>
+  )
 }
 
 export default OraganizationSearchPage;

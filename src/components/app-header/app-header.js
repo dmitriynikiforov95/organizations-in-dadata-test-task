@@ -6,7 +6,7 @@ const AppHeader = () => {
   return (
     <header class={s.header}>
       <div class={s.container}>
-        <img src={logo} alt="app-logo"/>
+        <img src={logo} className={s.logo} width="52" heigth="48" alt="app-logo"/>
       </div>
     </header>
   );

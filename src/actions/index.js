@@ -1,14 +1,33 @@
 const changeQuery = query => {
   return {
-    type: "QUERY_CHANGED",
+    type: "ORGANIZATIONS_FETCH_REQUEST",
     payload: query
   };
 };
-const getOrganizations = organizations => {
+
+const organizationsLoaded = organizations => {
   return {
-    type: "ORGANIZATIONS_GETTED",
+    type: "ORGANIZATIONS_FETCH_SUCCESS",
     payload: organizations
   };
+};
+
+const organizationsError = (error) => {
+  return {
+    type: 'ORGANIZATIONS_FETCH_FAILURE',
+    payload: error
+  }
+}
+
+const fetchOrganizations = (dispatch) => (dadataApiService, query, condition) => {
+  dadataApiService
+    .fetchOrganizations(query)
+    .then(res => {
+      condition && dispatch(organizationsLoaded(res.suggestions));
+    })
+    .catch(error => {
+      dispatch(organizationsError(error.message));
+    });
 };
 
 const getОrganizationDetails = organization => {
@@ -24,17 +43,18 @@ const saveOrganization = organization => {
     payload: organization
   }
 }
-const deleteOrganization = organization => {
+
+const removeOrganization = organization => {
   return {
-    type: "ORGANIZATION_DELETED",
+    type: "ORGANIZATION_REMOVED_FROM_SAVED",
     payload: organization
   }
 }
 
 export {
   changeQuery,
-  getOrganizations,
+  fetchOrganizations,
   getОrganizationDetails,
   saveOrganization,
-  deleteOrganization,
+  removeOrganization,
 };

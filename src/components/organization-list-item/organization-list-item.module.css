@@ -1,35 +1,97 @@
 .container {
-    margin-bottom: 16px;
-    padding-top: 7px;
-    padding-left: 19px;
-    padding-right: 5px;
+  padding-top: 7px;
+  padding-bottom: 4px;
+  padding-left: 23px;
+  padding-right: 23px;
+  cursor: pointer;
 }
 
 .container:hover {
-    background-color: #F8F8F8;
+  background-color: #f8f8f8;
+}
+
+.savedOrganizationListContainer {
+  position: relative;
+  padding: 16px;
+  border: 1px solid #dfdfdf;
+  border-radius: 3px;
+  margin-bottom: 21px;
 }
 
 .organizationDetail {
-    margin-right:15px;
+  margin: 0;
+  margin-bottom: 5px;
+  font-size: 12px;
+  line-height: 188.55%;
+}
+.organizationDetailName {
+  margin-right: 5px;
+  color: #777777;
+}
+.savedOrganizationListOrgNameContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
-.valueContainer {
-  display: flex;
-    justify-content: space-between;
+.orgNameText {
+  font-size: 14px;
+  line-height: 140%;
 }
+
+.savedOrganizationListOrgNameText {
+  font-size: 18px;
+  line-height: 188.55%;
+}
+
 .moreDetailsContainer {
-    cursor: pointer;
+  position: absolute;
+  bottom: 5px;
+  right: 12px;
+  margin: 0;
+  cursor: pointer;
+}
+.moreDetailsWrapper {
+  position:relative;
+  padding-right:10px;
+  margin:0;
 }
 
 .moreDetailsText {
-    margin-right: 5px;
+  margin-right: 5px;
+  color: #777777;
+  text-decoration-line: underline;
 }
+
 .arrow {
-    transition: transform 0.4s;
+  display: inline-block;
+  position: absolute;
+  padding: 3px;
+  margin-top: 5px;
+  top:3px;
+  border: solid #777777;
+  border-width: 0 1px 1px 0;
+  transform: rotate(45deg);
+  transition: transform 0.4s;
 }
+
 .trashCan {
-    cursor: pointer;
+  cursor: pointer;
+  transition: scale 0.4s;
 }
+
+.trashCan:hover {
+  transform: scale(1.2);
+}
+
 .arrowActive {
-    transform: rotate(180deg);
+  top:6px;
+  transform: rotate(-135deg);
+}
+
+.organizationDetailsExpansionPanelWrapper {
+  overflow: hidden;
+}
+.organizationDetailsExpansionPanelWrapperActive {
+  margin-bottom: 5px;
 }

@@ -1,9 +1,7 @@
 import {
-    DadataApiServiceProvider,
-    DadataApiServiceConsumer
+    DadataApiServiceContext
 } from './dadata-api-service-context.js';
 
 export {
-    DadataApiServiceProvider,
-    DadataApiServiceConsumer
+    DadataApiServiceContext
 }

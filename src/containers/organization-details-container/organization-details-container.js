@@ -10,20 +10,23 @@ const OrganizationDetailsContainer = ({
     savedOrganizations,
 }) => {
 
-    const [isOrganizationSaved, setIsOrganizationSavedValue] = useState(false);
+    const isOrganizationAlreadySaved = 
+    savedOrganizations.find(({ data: { hid } }) => hid === organization.data.hid) ? true : false;
+
+    const [isOrganizationSaved, setIsOrganizationSavedValue] = useState(isOrganizationAlreadySaved);
 
     useEffect(() => {
-        if (savedOrganizations.find(({ data: { hid } }) => hid === organization.data.hid)) {
+        if (isOrganizationAlreadySaved) {
             setIsOrganizationSavedValue(true);
         }
-    }, [savedOrganizations]);
+    }, [savedOrganizations, isOrganizationAlreadySaved]);
 
     return (
-      <OrganizationDetails
-        organization={organization}
-        isOrganizationSaved={isOrganizationSaved}
-        saveOrganization={saveOrganization}
-      />
+        <OrganizationDetails
+            organization={organization}
+            isOrganizationSaved={isOrganizationSaved}
+            saveOrganization={saveOrganization}
+        />
     );
 };
 

@@ -1,83 +1,129 @@
-import React  from "react";
+import React, { useRef } from "react";
 
-import arrow from "./arrow.svg";
 import trashCan from "./trash-can.svg";
+import classNames from 'classnames/bind';
 
 import s from "./organization-list-item.module.css";
 
-const OrganizationDetailsItem = ({ name, value }) => {
-  if (!value) return null;
+const OrganizationDetailsList = ({ details }) => {
+  const OrganizationDetailsListItem = ({ name, value }) =>
+    value ? (
+      <p className={s.organizationDetail}><span className={s.organizationDetailName}>
+        {(name === "инн" || name ===  "кпп" || name === "огрн") ? name.toUpperCase() : name}
+      </span>
+        {value}</p>
+    ) : null;
 
-  return <p className={s.organizationDetail}>{`${name} ${value}`}</p>;
-};
-
-const OrganizationListItem = ({
-      organizationName,
-      organizationDetails,
-      isSavedOrganizationList,
-      getОrganizationDetails,
-      deleteOrganization,
-      openDetails,
-      isMoreDetailsOpen,
-}) => {
-
-  const showedOrganizationDetails = (
+  return (
     <>
-      {organizationDetails.map((item) => (
-        <OrganizationDetailsItem {...item} />
+      {details.map((detail, id) => (
+        <OrganizationDetailsListItem {...detail} key={id} />
       ))}
     </>
   );
+};
 
-  let arrowClazz = s.arrow;
+const OrganizationListItem = ({
+  organization,
+  organizationDetails,
+  isSavedOrganizationList,
+  getОrganizationDetails,
+  removeOrganization,
+  openDetails,
+  isMoreDetailsOpen,
+}) => {
 
-  if (isMoreDetailsOpen) arrowClazz += " " + s.arrowActive;
+  const contentRef = useRef(null);
 
+  const expansionPanelContentStyle = {
+    transitionProperty: "max-height",
+    transitionDuration: " 0.4s",
+    maxHeight: isMoreDetailsOpen
+      ? `${contentRef.current.scrollHeight}px`
+      : "0px",
+  };
+
+  const cx = classNames.bind(s);
+
+  const containerClazz = cx({
+    container: !isSavedOrganizationList,
+    savedOrganizationListContainer: isSavedOrganizationList,
+  });
+
+  const orgNameTextClazz = cx({
+    orgNameText: !isSavedOrganizationList,
+    savedOrganizationListOrgNameText: isSavedOrganizationList,
+  });
+
+  const orgNameContainerClazz = cx({
+    orgNameContainer: !isSavedOrganizationList,
+    savedOrganizationListOrgNameContainer: isSavedOrganizationList,
+  });
+
+  const arrowClazz = cx({ arrow: true, arrowActive: isMoreDetailsOpen });
+  
+  const organizationDetailsExpansionPanelWrapperClazz = cx({
+    organizationDetailsExpansionPanelWrapper: true,
+    organizationDetailsExpansionPanelWrapperActive: isMoreDetailsOpen,
+  });
+
+
+  const organizationDetailsExpansionPanel = (
+    <>
+      <div>
+        <OrganizationDetailsList details={organizationDetails.slice(0, 1)} />
+      </div>
+      <div
+        ref={contentRef}
+        style={expansionPanelContentStyle}
+      >
+        <OrganizationDetailsList details={organizationDetails.slice(1)} />
+      </div>
+    </>
+  )
+  
   return (
     <div
-      className={s.container}
-      onClick={
-        !isSavedOrganizationList
-          ? () => getОrganizationDetails()
-          : null
-      }
+      className={containerClazz}
+      onClick={!isSavedOrganizationList ? getОrganizationDetails : null}
     >
-      <div className={s.valueContainer}>
-        <b>{organizationName}</b>
+      <div className={orgNameContainerClazz}>
+        <b className={orgNameTextClazz}>{organization.value}</b>
+       {!isSavedOrganizationList && <p>
+        <span className={orgNameTextClazz}>{organization.data.inn}</span>
+        <span className={orgNameTextClazz}>{organization.data.address.data.city_with_type}</span>
+       </p>}
         {isSavedOrganizationList && (
           <img
             className={s.trashCan}
             src={trashCan}
-            alt="trash-can"
-            onClick={() => deleteOrganization()}
+            alt="remove-organization"
+            onClick={removeOrganization}
           />
         )}
       </div>
-
-      <div className={s.wrapper}>{showedOrganizationDetails}</div>
       <div>
-        {isSavedOrganizationList && (
-          <div
-            onClick={() =>
-              openDetails((prevIsMoreDetailsOpen) => {
-                const isMoreDetailsOpen = !prevIsMoreDetailsOpen;
-                return isMoreDetailsOpen;
-              })
-            }
-          >
-            <p className={s.moreDetailsContainer}>
-              <span className={s.moreDetailsText}>
-                {" "}
-                {isMoreDetailsOpen ? "скрыть подробности" : "подробнее"}
-              </span>
-              <img className={arrowClazz} src={arrow} alt="arrow" />
-            </p>
-          </div>
-        )}
+        <div className={organizationDetailsExpansionPanelWrapperClazz}>
+          {isSavedOrganizationList && organizationDetailsExpansionPanel}
+        </div>
+        <div>
+          {isSavedOrganizationList && (
+            <div
+              onClick={() => openDetails((prevIsMoreDetailsOpen) => !prevIsMoreDetailsOpen)}
+            >
+              <p className={s.moreDetailsContainer}>
+                <p className={s.moreDetailsWrapper}> <span className={s.moreDetailsText}>
+                  {isMoreDetailsOpen ? "скрыть подробности" : "подробнее"}
+                </span>
+                <i className={arrowClazz}></i>
+                  </p>
+              </p>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
-};
-
+}
 
 export default OrganizationListItem;

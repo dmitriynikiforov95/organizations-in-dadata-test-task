@@ -1,18 +1,21 @@
 .container {
-    display: flex;
-    margin-top:48px;
+  display: flex;
+  margin-top: 15px;
 }
 
 .text {
-margin-left: 32px;
-font-size: 14px;
-line-height: 140%;
-color: #777777;
+  margin-left: 20px;
+  font-size: 14px;
+  line-height: 140%;
+  color: #777777;
 }
 
 .isResultEmpty {
-font-size: 14px;
-font-style:bold;
-line-height: 140%;
-color: #777777;
+  margin: 0;
+  font-size: 14px;
+  line-height: 26px;
+  color: #777777;
+}
+.orgSearchPage {
+  margin-top: 10px;
 }

@@ -3,24 +3,24 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 
-import { DadataApiServiceProvider } from "./components/dadata-api-service-context/";
+import { DadataApiServiceContext } from "./components/dadata-api-service-context/";
 import App from "./components/app";
-import ErrorBoundry from "./components/error-boundry/";
+import ErrorBoundary from "./components/error-boundary/";
 
 import DadataApiService from "./services/dadata-api-service";
 import store from "./store";
 
-const dadataService = new DadataApiService();
+const dadataApiService = new DadataApiService();
 
 ReactDOM.render(
   <Provider store={store}>
-    <ErrorBoundry>
-      <DadataApiServiceProvider value={dadataService}>
+    <ErrorBoundary>
+      <DadataApiServiceContext.Provider value={dadataApiService}>
         <BrowserRouter>
           <App />
         </BrowserRouter>
-      </DadataApiServiceProvider>
-    </ErrorBoundry>
+      </DadataApiServiceContext.Provider>
+    </ErrorBoundary>
   </Provider>,
   document.getElementById("root")
 );

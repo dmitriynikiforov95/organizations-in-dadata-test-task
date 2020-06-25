@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 
-import { deleteOrganization, getОrganizationDetails } from "../../actions";
+import { removeOrganization, getОrganizationDetails } from "../../actions";
 
 import OrganizationListItem from "../../components/organization-list-item";
 
@@ -9,10 +9,9 @@ const OrganizationListItemContaniner = ({
   organization,
   getОrganizationDetails,
   isSavedOrganizationList,
-  deleteOrganization,
+  removeOrganization,
 }) => {
   const {
-    value,
     data: { inn, kpp, ogrn, management, address },
   } = organization;
 
@@ -35,32 +34,28 @@ const OrganizationListItemContaniner = ({
     },
     {
       name: "Юридический адрес",
-      value: address.unrestricted_value,
+      value: address?.unrestricted_value,
     },
   ];
 
   const [isMoreDetailsOpen, openDetails] = useState(false);
 
-  organizationDetails = isMoreDetailsOpen
-    ? organizationDetails
-    : [organizationDetails[0]];
-
   return (
     <OrganizationListItem
-      organizationName={value}
-      organizationDetails={organizationDetails}
+       organization={organization}
       isSavedOrganizationList={isSavedOrganizationList}
       getОrganizationDetails={() => getОrganizationDetails(organization)}
-      deleteOrganization={() => deleteOrganization(organization)}
+      removeOrganization={() => removeOrganization(organization)}
       isMoreDetailsOpen={isMoreDetailsOpen}
       openDetails={openDetails}
+      organizationDetails={organizationDetails}
     />
   );
 };
 
 const mapDispatchToProps = {
   getОrganizationDetails,
-  deleteOrganization,
+  removeOrganization,
 };
 
 export default connect(
