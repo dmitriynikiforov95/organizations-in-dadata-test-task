@@ -1,4 +1,4 @@
-.container {
+.orgSearchPageItemContainer {
   padding-top: 7px;
   padding-bottom: 4px;
   padding-left: 23px;
@@ -6,11 +6,11 @@
   cursor: pointer;
 }
 
-.container:hover {
+.orgSearchPageItemContainer:hover {
   background-color: #f8f8f8;
 }
 
-.savedOrganizationListContainer {
+.savedOrgsPageItemContainer {
   position: relative;
   padding: 16px;
   border: 1px solid #dfdfdf;
@@ -18,84 +18,89 @@
   margin-bottom: 21px;
 }
 
-.organizationDetail {
+.savedOrgsPageItemSavedOrgDetail {
   margin: 0;
   margin-bottom: 5px;
   font-size: 12px;
   line-height: 188.55%;
 }
-.organizationDetailName {
+
+.savedOrgsPageItemSavedOrgDetailName {
   margin-right: 5px;
   color: #777777;
 }
-.savedOrganizationListOrgNameContainer {
+
+.orgsSearchPageItemOrgNameContainer {
+  font-size: 14px;
+  line-height: 140%;
+}
+
+.savedOrgsPageItemOrgNameContainer {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
 }
 
-.orgNameText {
-  font-size: 14px;
-  line-height: 140%;
-}
-
-.orgInn {
+.orgSearchPageItemOrgInn {
   margin-right:5px;
 }
 
-.savedOrganizationListOrgNameText {
+.savedOrganizationListOrgName {
   font-size: 18px;
   line-height: 188.55%;
 }
 
-.moreDetailsContainer {
+.savedOrgsPageItemMoreDetailsContainer {
   position: absolute;
   bottom: 5px;
   right: 12px;
   margin: 0;
   cursor: pointer;
 }
-.moreDetailsWrapper {
+
+.savedOrgsPageItemMoreDetailsPositioningWrapper {
   position:relative;
-  padding-right:10px;
+  padding-right:15px;
   margin:0;
 }
 
-.moreDetailsText {
-  margin-right: 5px;
+.savedOrgsPageItemMoreDetailsText {
   color: #777777;
   text-decoration-line: underline;
 }
 
-.arrow {
+.savedOrgsPageItemArrow {
   display: inline-block;
   position: absolute;
   padding: 3px;
-  margin-top: 5px;
-  top:3px;
+  top:8px;
+  right: 2px;
   border: solid #777777;
   border-width: 0 1px 1px 0;
   transform: rotate(45deg);
   transition: transform 0.4s;
 }
 
-.trashCan {
+.savedOrgsPageItemArrowActive {
+  top:12px;
+  transform: rotate(-135deg);
+}
+
+.savedOrgsPageItemTrashCan {
+  width:16px;
+  height:18px;
   cursor: pointer;
   transition: scale 0.4s;
 }
 
-.trashCan:hover {
+.savedOrgsPageItemTrashCan:hover {
   transform: scale(1.2);
 }
 
-.arrowActive {
-  top:6px;
-  transform: rotate(-135deg);
-}
-
-.organizationDetailsExpansionPanelWrapper {
+.savedOrgsPageItemExpansionPanelWrapper {
   overflow: hidden;
 }
-.organizationDetailsExpansionPanelWrapperActive {
+
+.savedOrgsPageItemExpansionPanelWrapperAcitve {
   margin-bottom: 5px;
 }

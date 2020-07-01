@@ -20,7 +20,11 @@ const OraganizationSearchPageContainer = ({ queryLength, isOrganizationsLoading,
   const errorMessage = organizationsError ? <ErrorIndicator /> : null;
 
   let pageContent;
-  const isShowOrganizationDetailsContainer = (organizations.length === 1 && isShowOrganizationDetails && !errorMessage && hasData);
+  const isShowOrganizationDetailsContainer =
+    organizations.length === 1 &&
+    isShowOrganizationDetails &&
+    !errorMessage &&
+    hasData;
 
   if (isShowOrganizationDetailsContainer) {
     pageContent = <OrganizationDetailsContainer organization={organizations[0]} />;
@@ -31,8 +35,14 @@ const OraganizationSearchPageContainer = ({ queryLength, isOrganizationsLoading,
   }
 
   let resultHint;
-  const isShowSearchHintResultEmpty = queryLength !== 0 && organizations.length === 0 && !isOrganizationsLoading && hasData;
-  const isShowPreSearchHint = queryLength === 0 && organizations.length === 0 && hasData;
+  const isShowSearchHintResultEmpty =
+    (queryLength !== 0 &&
+    organizations.length === 0 &&
+    !isOrganizationsLoading &&
+    hasData)
+    
+  const isShowPreSearchHint =
+    queryLength === 0 && organizations.length === 0 && hasData;
 
   if (isShowSearchHintResultEmpty) {
     resultHint = <SearchHint isSearchResultEmpty={true} />;

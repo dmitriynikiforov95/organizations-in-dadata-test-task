@@ -1,5 +1,5 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import {Route } from "react-router-dom";
 
 import NavTabsContainer from "../../containers/nav-tabs-container";
 import OraganizationSearchPageContainer from "../../containers/pages-container/organizations-search-page-container";
@@ -18,12 +18,12 @@ const App = () => {
   ]
 
   return (
-    <div>
+    <>
       <AppHeader />
       <div className="app-container">
         <h1 className="app-title">Мои организации</h1>
         <NavTabsContainer />
-        <div className="pages-content-container">
+        <div className="pages-positioning-container">
           {routes.map(({ path, Component }) => (
             <Route key={path} exact path={path}>
               {({ match }) => (
@@ -44,8 +44,9 @@ const App = () => {
           ))}
         </div>
       </div>
-    </div>
+    </>
   );
+
 };
 
 export default App;

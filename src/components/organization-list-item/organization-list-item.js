@@ -1,23 +1,27 @@
 import React, { useRef } from "react";
 
 import trashCan from "./trash-can.svg";
-import classNames from 'classnames/bind';
+import classNames from "classnames/bind";
 
 import s from "./organization-list-item.module.css";
 
-const OrganizationDetailsList = ({ details }) => {
-  const OrganizationDetailsListItem = ({ name, value }) =>
+const SavedOrgDetailsList = ({ details }) => {
+  const SavedOrgDetailsListItem = ({ name, value }) =>
     value ? (
-      <p className={s.organizationDetail}><span className={s.organizationDetailName}>
-        {(name === "инн" || name ===  "кпп" || name === "огрн") ? name.toUpperCase() : name}
-      </span>
-        {value}</p>
+      <p className={s.savedOrgsPageItemSavedOrgDetail}>
+        <span className={s.savedOrgsPageItemSavedOrgDetailName}>
+          {name === "инн" || name === "кпп" || name === "огрн"
+            ? name.toUpperCase()
+            : name}
+        </span>
+        {value}
+      </p>
     ) : null;
 
   return (
     <>
       {details.map((detail, id) => (
-        <OrganizationDetailsListItem {...detail} key={id} />
+        <SavedOrgDetailsListItem {...detail} key={id} />
       ))}
     </>
   );
@@ -26,13 +30,12 @@ const OrganizationDetailsList = ({ details }) => {
 const OrganizationListItem = ({
   organization,
   organizationDetails,
-  isSavedOrganizationList,
+  isSavedOrgsList,
   getОrganizationDetails,
   removeOrganization,
   openDetails,
   isMoreDetailsOpen,
 }) => {
-
   const contentRef = useRef(null);
 
   const expansionPanelContentStyle = {
@@ -46,84 +49,85 @@ const OrganizationListItem = ({
   const cx = classNames.bind(s);
 
   const containerClazz = cx({
-    container: !isSavedOrganizationList,
-    savedOrganizationListContainer: isSavedOrganizationList,
-  });
-
-  const orgNameTextClazz = cx({
-    orgNameText: !isSavedOrganizationList,
-    savedOrganizationListOrgNameText: isSavedOrganizationList,
+    orgSearchPageItemContainer: !isSavedOrgsList,
+    savedOrgsPageItemContainer: isSavedOrgsList,
   });
 
   const orgNameContainerClazz = cx({
-    orgNameContainer: !isSavedOrganizationList,
-    savedOrganizationListOrgNameContainer: isSavedOrganizationList,
+    orgsSearchPageItemOrgNameContainer: !isSavedOrgsList,
+    savedOrgsPageItemOrgNameContainer: isSavedOrgsList,
   });
 
-  const arrowClazz = cx({ arrow: true, arrowActive: isMoreDetailsOpen });
-  
-  const organizationDetailsExpansionPanelWrapperClazz = cx({
-    organizationDetailsExpansionPanelWrapper: true,
-    organizationDetailsExpansionPanelWrapperActive: isMoreDetailsOpen,
-  });
+  const orgsSearchPageItemDetails = (
+    <p>
+      <span className={s.orgSearchPageItemOrgInn}>{organization.data.inn}</span>
+      <span>{organization.data.address.data.city_with_type}</span>
+    </p>
+  );
 
-
-  const organizationDetailsExpansionPanel = (
+  const expansionPanel = (
     <>
       <div>
-        <OrganizationDetailsList details={organizationDetails.slice(0, 1)} />
+        <SavedOrgDetailsList details={organizationDetails.slice(0, 1)} />
       </div>
-      <div
-        ref={contentRef}
-        style={expansionPanelContentStyle}
-      >
-        <OrganizationDetailsList details={organizationDetails.slice(1)} />
+      <div ref={contentRef} style={expansionPanelContentStyle}>
+        <SavedOrgDetailsList details={organizationDetails.slice(1)} />
       </div>
     </>
-  )
-  
+  );
+
+  const savedOrgsPageItemDetails = (
+    <>
+      <div
+        className={cx({
+          savedOrgsPageItemExpansionPanelWrapper: true,
+          savedOrgsPageItemExpansionPanelWrapperActive: isMoreDetailsOpen,
+        })}
+      >
+        {expansionPanel}
+      </div>
+      <div
+        onClick={() =>
+          openDetails((prevIsMoreDetailsOpen) => !prevIsMoreDetailsOpen)
+        }
+      >
+        <p className={s.savedOrgsPageItemMoreDetailsContainer}>
+          <p className={s.savedOrgsPageItemMoreDetailsPositioningWrapper}>
+            {" "}
+            <span className={s.savedOrgsPageItemMoreDetailsText}>
+              {isMoreDetailsOpen ? "скрыть подробности" : "подробнее"}
+            </span>
+            <i
+              className={cx({ savedOrgsPageItemArrow: true, savedOrgsPageItemArrowActive: isMoreDetailsOpen })}
+            ></i>
+          </p>
+        </p>
+      </div>
+    </>
+  );
+
   return (
     <div
       className={containerClazz}
-      onClick={!isSavedOrganizationList ? getОrganizationDetails : null}
+      onClick={isSavedOrgsList ? null : getОrganizationDetails}
     >
       <div className={orgNameContainerClazz}>
-        <b className={orgNameTextClazz}>{organization.value}</b>
-       {!isSavedOrganizationList && <p>
-        <span className={orgNameTextClazz + " " + s.orgInn}>{organization.data.inn}</span>
-        <span className={orgNameTextClazz}>{organization.data.address.data.city_with_type}</span>
-       </p>}
-        {isSavedOrganizationList && (
+        <b className={cx({ savedOrganizationListOrgName: isSavedOrgsList })}>
+          {organization.value}
+        </b>
+        {!isSavedOrgsList && orgsSearchPageItemDetails}
+        {isSavedOrgsList && (
           <img
-            className={s.trashCan}
+            className={s.savedOrgsPageItemTrashCan}
             src={trashCan}
             alt="remove-organization"
             onClick={removeOrganization}
           />
         )}
       </div>
-      <div>
-        <div className={organizationDetailsExpansionPanelWrapperClazz}>
-          {isSavedOrganizationList && organizationDetailsExpansionPanel}
-        </div>
-        <div>
-          {isSavedOrganizationList && (
-            <div
-              onClick={() => openDetails((prevIsMoreDetailsOpen) => !prevIsMoreDetailsOpen)}
-            >
-              <p className={s.moreDetailsContainer}>
-                <p className={s.moreDetailsWrapper}> <span className={s.moreDetailsText}>
-                  {isMoreDetailsOpen ? "скрыть подробности" : "подробнее"}
-                </span>
-                <i className={arrowClazz}></i>
-                  </p>
-              </p>
-            </div>
-          )}
-        </div>
-      </div>
+      {isSavedOrgsList && savedOrgsPageItemDetails}
     </div>
   );
-}
+};
 
 export default OrganizationListItem;

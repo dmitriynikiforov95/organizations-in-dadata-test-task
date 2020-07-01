@@ -11,11 +11,12 @@
     "gh-pages": "^3.1.0",
     "lodash.throttle": "^4.1.1",
     "react": "^16.13.0",
+    "react-app-polyfill": "^1.0.6",
     "react-debounce-input": "^3.2.2",
     "react-dom": "^16.13.0",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.0",
+    "react-scripts": "3.2.0",
     "react-transition-group": "^4.4.1",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8"
@@ -35,12 +36,14 @@
     "production": [
       ">0.2%",
       "not dead",
-      "not op_mini all"
+      "not op_mini all",
+      "ie >= 9"
     ],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
-      "last 1 safari version"
+      "last 1 safari version",
+      "ie 11"
     ]
   }
 }

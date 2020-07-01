@@ -42,8 +42,8 @@ const OrganizationListItemContaniner = ({
 
   return (
     <OrganizationListItem
-       organization={organization}
-      isSavedOrganizationList={isSavedOrganizationList}
+      organization={organization}
+      isSavedOrgsList={isSavedOrganizationList}
       getОrganizationDetails={() => getОrganizationDetails(organization)}
       removeOrganization={() => removeOrganization(organization)}
       isMoreDetailsOpen={isMoreDetailsOpen}
