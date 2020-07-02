@@ -1,23 +1,19 @@
 
 const EQUALITY = "equality";
 
-const searchOrganizationById = (organization, condition) => ({ data: { hid } }) =>
+const setOrganizationSearchConditionById = (organization, condition) => ({ data: { hid } }) =>
   (condition === "equality") ? hid === organization.data.hid : hid !== organization.data.hid;
 
 const getОganizationDetails = (organizations, organization) =>
-  organizations.filter(searchOrganizationById(organization, EQUALITY))
+  organizations.filter(setOrganizationSearchConditionById(organization, EQUALITY))
 
-const saveOrganization = (savedOrganizations, organization) => {
+const saveOrganization = (savedOrganizations, organization) =>
+  savedOrganizations.find(setOrganizationSearchConditionById(organization, EQUALITY))
+    ? savedOrganizations
+    : [organization, ...savedOrganizations];
 
-  if (savedOrganizations.find(searchOrganizationById(organization, EQUALITY))) {
-    return savedOrganizations;
-  }
-
-  return [organization, ...savedOrganizations];
-};
-
-const removeOrganization = (savedOrganizations, organization) =>
-  savedOrganizations.filter(searchOrganizationById(organization))
+const removeOrganizationFromSaved = (savedOrganizations, organization) =>
+  savedOrganizations.filter(setOrganizationSearchConditionById(organization))
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -50,7 +46,7 @@ const reducer = (state, action) => {
     case "ORGANIZATION_REMOVED_FROM_SAVED":
       return {
         ...state,
-        savedOrganizations: removeOrganization(state.savedOrganizations, action.payload)
+        savedOrganizations: removeOrganizationFromSaved(state.savedOrganizations, action.payload)
       }
     case "ORGANIZATION_DETAILS_GETTED":
       return {
