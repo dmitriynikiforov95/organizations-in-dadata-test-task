@@ -1,19 +1,19 @@
 
 const EQUALITY = "equality";
 
-const setOrganizationSearchConditionById = (organization, condition) => ({ data: { hid } }) =>
+const getOrganizationSearchConditionById = (organization, condition) => ({ data: { hid } }) =>
   (condition === "equality") ? hid === organization.data.hid : hid !== organization.data.hid;
 
 const getОganizationDetails = (organizations, organization) =>
-  organizations.filter(setOrganizationSearchConditionById(organization, EQUALITY))
+  organizations.filter(getOrganizationSearchConditionById(organization, EQUALITY))
 
 const saveOrganization = (savedOrganizations, organization) =>
-  savedOrganizations.find(setOrganizationSearchConditionById(organization, EQUALITY))
+  savedOrganizations.find(getOrganizationSearchConditionById(organization, EQUALITY))
     ? savedOrganizations
     : [organization, ...savedOrganizations];
 
 const removeOrganizationFromSaved = (savedOrganizations, organization) =>
-  savedOrganizations.filter(setOrganizationSearchConditionById(organization))
+  savedOrganizations.filter(getOrganizationSearchConditionById(organization))
 
 const reducer = (state, action) => {
   switch (action.type) {
