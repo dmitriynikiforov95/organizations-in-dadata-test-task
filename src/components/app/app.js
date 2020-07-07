@@ -1,5 +1,5 @@
 import React from "react";
-import {Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 
 import NavTabsContainer from "../../containers/nav-tabs-container";
 import OraganizationSearchPageContainer from "../../containers/pages-container/organizations-search-page-container";
@@ -11,11 +11,16 @@ import "./app.css";
 import { CSSTransition } from "react-transition-group";
 
 const App = () => {
-  
   const routes = [
-    { path: '/organizations-in-dadata', Component: OraganizationSearchPageContainer },
-    { path: '/organizations-in-dadata/saved-organizations', Component: SavedOrganizationsPageContainer },
-  ]
+    {
+      path: "/organizations-in-dadata",
+      Component: OraganizationSearchPageContainer,
+    },
+    {
+      path: "/organizations-in-dadata/saved-organizations",
+      Component: SavedOrganizationsPageContainer,
+    },
+  ];
 
   return (
     <>
@@ -35,8 +40,8 @@ const App = () => {
                 >
                   <div className="page">
                     <div className="pages-container">
-                    <Component />
-                      </div>
+                      <Component />
+                    </div>
                   </div>
                 </CSSTransition>
               )}
@@ -46,7 +51,6 @@ const App = () => {
       </div>
     </>
   );
-
 };
 
 export default App;

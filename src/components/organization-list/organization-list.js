@@ -5,31 +5,26 @@ import classNames from 'classnames/bind';
 
 import  "./organization-list.css";
 
-const OrganizationList = ({ organizations, isSavedOrganizationList }) => {
-
-  const organizationsList = (<TransitionGroup>
-    {organizations.map((item) => (
-      <CSSTransition key={item.data.hid} timeout={500} classNames="item">
-          <li>
-            <OrganizationListItemContaniner
-              organization={item}
-              isSavedOrganizationList={isSavedOrganizationList}
-            />
-          </li>
-      </CSSTransition>
-    ))}
-  </TransitionGroup>)
-
-  return (
-    <ul
-      className={classNames({
-        list: !isSavedOrganizationList,
-        savedOrganizationList: isSavedOrganizationList,
-      })}
-    >
-      {organizationsList}
-    </ul>
-  );
-};
+const OrganizationList = ({ organizations, isSavedOrganizationList }) => (
+  <ul
+    className={classNames({
+      list: !isSavedOrganizationList,
+      savedOrganizationList: isSavedOrganizationList,
+    })}
+  >
+      <TransitionGroup>
+        {organizations.map((item) => (
+          <CSSTransition key={item.data.hid} timeout={500} classNames="item">
+            <li>
+              <OrganizationListItemContaniner
+                organization={item}
+                isSavedOrganizationList={isSavedOrganizationList}
+              />
+            </li>
+          </CSSTransition>
+        ))}
+      </TransitionGroup>
+  </ul>
+);
 
 export default OrganizationList;

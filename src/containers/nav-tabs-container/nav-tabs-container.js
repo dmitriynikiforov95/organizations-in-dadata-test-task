@@ -38,10 +38,8 @@ const NavTabsContainer = ({ savedOrganizations }) => {
   );
 };
 
-const mapStateToProps = ({ savedOrganizations }) => {
-  return {
-    savedOrganizations,
-  };
-};
+const mapStateToProps = ({ savedOrganizations }) => ({
+  savedOrganizations,
+})
 
 export default connect(mapStateToProps)(NavTabsContainer);

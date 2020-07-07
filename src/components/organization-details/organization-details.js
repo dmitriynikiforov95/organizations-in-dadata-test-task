@@ -12,6 +12,25 @@ const OrganizationDetails = ({
     data: { inn, kpp, ogrn, management, address },
   } = organization;
 
+  const identifierList = [
+    { text: "инн", value: inn },
+    { text: "кпп", value: kpp },
+    { text: "огрн", value: ogrn },
+  ];
+
+  const managementInfo = [
+    {
+      text: "юридический адрес",
+      value: address?.unrestricted_value,
+      clazz: s.addressWrapper,
+    },
+    {
+      text: "генеральный директор",
+      value: management?.name,
+      clazz: s.generalManagerWrapper,
+    },
+  ];
+
   const cx = classNames.bind(s);
 
   const saveOrganizationBtn = (
@@ -28,34 +47,32 @@ const OrganizationDetails = ({
       </span>
     </button>
   );
+
   return (
     <>
-      <h2 className={s.title}>{value}</h2>
-      <div className={s.OrganizationDetailsWrapper}>
+      <h2 className={s.orgName}>{value}</h2>
+      <div className={s.orgDetailsWrapper}>
         <p className={s.managementInfo}>
-          <p className={s.addressWrapper}>
-          <b>Юридический адрес</b>
-          <br></br>
-          {address?.unrestricted_value}
-          </p>
-          {management?.name && (
-            <p className={s.generalManagerWrapper}>
-              <b>Генеральный директор</b>
-              <br></br>
-              {management.name}
-            </p>
+          {managementInfo.map(
+            ({ text, value, clazz }) =>
+              value && (
+                <p className={clazz}>
+                  <b>{text[0].toUpperCase() + text.slice(1)}</b>
+                  <br></br>
+                  {value}
+                </p>
+              )
           )}
         </p>
         <ul className={s.identifierList}>
-          <li className={s.identifierItem}>
-            <strong>{"инн".toUpperCase()}</strong> {inn}
-          </li>
-          <li className={s.identifierItem}>
-            <strong>{"кпп".toUpperCase()} </strong> {kpp}
-          </li>
-          <li className={s.identifierItem}>
-            <strong>{"огрн".toUpperCase()} </strong> {ogrn}
-          </li>
+          {identifierList.map(
+            ({ text, value }) =>
+              value && (
+                <li className={s.identifierItem}>
+                  <strong>{text.toUpperCase()}</strong> {value}
+                </li>
+              )
+          )}
         </ul>
       </div>
       {saveOrganizationBtn}

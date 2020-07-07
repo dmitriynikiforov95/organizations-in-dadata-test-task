@@ -5,10 +5,15 @@ import SearchHint from "../../../components/search-hint";
 import OrganizationDetailsContainer from "../../organization-details-container";
 import OrganizationListContainer from "../../organization-list-container";
 import Spinner from "../../../components/spinner";
-import ErrorIndicator from './../../../components/error-indicator/error-indicator';
+import ErrorIndicator from "./../../../components/error-indicator/error-indicator";
 
-const OraganizationSearchPageContainer = ({ queryLength, isOrganizationsLoading, organizations, isShowOrganizationDetails, organizationsError }) => {
-
+const OraganizationSearchPageContainer = ({
+  queryLength,
+  isOrganizationsLoading,
+  organizations,
+  isShowOrganizationDetails,
+  organizationsError,
+}) => {
   const searchPanel = useRef();
 
   const focusSearchPanel = () => {
@@ -27,27 +32,30 @@ const OraganizationSearchPageContainer = ({ queryLength, isOrganizationsLoading,
     hasData;
 
   if (isShowOrganizationDetailsContainer) {
-    pageContent = <OrganizationDetailsContainer organization={organizations[0]} />;
+    pageContent = (
+      <OrganizationDetailsContainer organization={organizations[0]} />
+    );
   } else if (hasData && queryLength !== 0 && organizations.length !== 0) {
-    pageContent = <OrganizationListContainer />
+    pageContent = <OrganizationListContainer />;
   } else {
     pageContent = null;
   }
 
   let resultHint;
-  const isShowSearchHintResultEmpty =
-    (queryLength !== 0 &&
+
+  const isSearchingResultEmpty =
+    queryLength !== 0 &&
     organizations.length === 0 &&
     !isOrganizationsLoading &&
-    hasData)
-    
+    hasData;
+
   const isShowPreSearchHint =
     queryLength === 0 && organizations.length === 0 && hasData;
 
-  if (isShowSearchHintResultEmpty) {
+  if (isSearchingResultEmpty) {
     resultHint = <SearchHint isSearchResultEmpty={true} />;
   } else if (isShowPreSearchHint) {
-    resultHint = <SearchHint focusSearchPanel={focusSearchPanel} />
+    resultHint = <SearchHint focusSearchPanel={focusSearchPanel} />;
   } else {
     resultHint = null;
   }
@@ -61,7 +69,7 @@ const OraganizationSearchPageContainer = ({ queryLength, isOrganizationsLoading,
       searchPanelRef={searchPanel}
     />
   );
-}
+};
 
 const mapStateToProps = ({
   searchPanelValue,
@@ -69,15 +77,12 @@ const mapStateToProps = ({
   organizations,
   organizationsError,
   isShowOrganizationDetails,
-
-}) => {
-  return {
-    queryLength: searchPanelValue.query.length,
-    organizations,
-    isShowOrganizationDetails,
-    isOrganizationsLoading,
-    organizationsError,
-  };
-};
+}) => ({
+  queryLength: searchPanelValue.query.length,
+  organizations,
+  isShowOrganizationDetails,
+  isOrganizationsLoading,
+  organizationsError,
+});
 
 export default connect(mapStateToProps)(OraganizationSearchPageContainer);

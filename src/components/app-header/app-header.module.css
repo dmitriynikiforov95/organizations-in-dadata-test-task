@@ -1,18 +1,17 @@
 .header {
-    margin-bottom: 55px;
-    background-color: #FFFFFF;
+  margin-bottom: 55px;
+  background-color: #ffffff;
 }
 
 .container {
-    width: 736px;
-    padding: 14px 20px;
-    margin:0 auto;
+  width: 736px;
+  padding: 14px 20px;
+  margin: 0 auto;
 }
 
 .logo {
-    display: block;
-    width: 52px;
-    height:48px;
-    margin: 0 auto;
+  display: block;
+  width: 52px;
+  height: 48px;
+  margin: 0 auto;
 }
-

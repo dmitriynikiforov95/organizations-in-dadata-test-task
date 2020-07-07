@@ -1,23 +1,23 @@
 .searchPanel {
-width: 688px;
-padding-top:13px;
-padding-bottom:13px;
-padding-left:16px;
-background: #FFFFFF;
-border: 1px solid #E5E5E5;
-border-radius: 3px;
+  width: 688px;
+  padding-top: 13px;
+  padding-bottom: 13px;
+  padding-left: 16px;
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
 }
 
 .searchPanel:focus {
-    outline:none;
-    border: 1px solid #FAE29F;
+  outline: none;
+  border: 1px solid #fae29f;
 }
 
 .prePanelText {
-margin:0;
-margin-bottom:3px;
-padding:0;
-font-size: 14px;
-line-height: 26px;
-color: #2B2829;
+  margin: 0;
+  margin-bottom: 3px;
+  padding: 0;
+  font-size: 14px;
+  line-height: 26px;
+  color: #2b2829;
 }

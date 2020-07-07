@@ -1,11 +1,4 @@
-.OrganizationDetailsWrapper {
-  display: flex;
-  justify-content: space-between;
-  font-size: 14px;
-  line-height: 188.55%;
-}
-
-.title {
+.orgName {
   margin: 0;
   margin-top: 5px;
   margin-bottom: 20px;
@@ -15,12 +8,19 @@
   border-bottom: 1px solid #dfdfdf;
 }
 
+.orgDetailsWrapper {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  line-height: 188.55%;
+}
+
 .managementInfo {
   margin: 0;
 }
 
 .addressWrapper {
-  max-width: 450px;
+  max-width: 480px;
   margin: 0;
   margin-bottom: 5px;
   word-break: break-word;

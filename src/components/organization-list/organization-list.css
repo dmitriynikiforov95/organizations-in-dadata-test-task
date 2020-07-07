@@ -1,19 +1,19 @@
 .list {
-    width: 688px;
-    margin: 0;
-    padding: 0;
-    padding-top: 21px;
-    padding-bottom: 8px;
-    list-style: none;
-    border: 1px solid #E5E5E5;
-    box-sizing: border-box;
+  width: 688px;
+  margin: 0;
+  padding: 0;
+  padding-top: 21px;
+  padding-bottom: 8px;
+  list-style: none;
+  border: 1px solid #e5e5e5;
+  box-sizing: border-box;
 }
 
 .savedOrganizationList {
-    margin: 0;
-    padding:0;
-    list-style: none;
-    border:none;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: none;
 }
 
 .item-enter {
@@ -28,6 +28,7 @@
 .item-exit {
   opacity: 1;
 }
+
 .item-exit-active {
   opacity: 0;
   transition: opacity 200ms ease-in;

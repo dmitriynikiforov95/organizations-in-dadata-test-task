@@ -42,7 +42,7 @@
 }
 
 .orgSearchPageItemOrgInn {
-  margin-right:5px;
+  margin-right: 5px;
 }
 
 .savedOrganizationListOrgName {
@@ -59,9 +59,9 @@
 }
 
 .savedOrgsPageItemMoreDetailsPositioningWrapper {
-  position:relative;
-  padding-right:15px;
-  margin:0;
+  position: relative;
+  padding-right: 15px;
+  margin: 0;
 }
 
 .savedOrgsPageItemMoreDetailsText {
@@ -73,7 +73,7 @@
   display: inline-block;
   position: absolute;
   padding: 3px;
-  top:8px;
+  top: 8px;
   right: 2px;
   border: solid #777777;
   border-width: 0 1px 1px 0;
@@ -82,13 +82,13 @@
 }
 
 .savedOrgsPageItemArrowActive {
-  top:12px;
+  top: 12px;
   transform: rotate(-135deg);
 }
 
 .savedOrgsPageItemTrashCan {
-  width:16px;
-  height:18px;
+  width: 16px;
+  height: 18px;
   cursor: pointer;
   transition: scale 0.4s;
 }
