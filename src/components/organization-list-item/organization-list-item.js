@@ -98,7 +98,10 @@ const OrganizationListItem = ({
               {isMoreDetailsOpen ? "скрыть подробности" : "подробнее"}
             </span>
             <i
-              className={cx({ savedOrgsPageItemArrow: true, savedOrgsPageItemArrowActive: isMoreDetailsOpen })}
+              className={cx({
+                savedOrgsPageItemArrow: true,
+                savedOrgsPageItemArrowActive: isMoreDetailsOpen,
+              })}
             ></i>
           </p>
         </p>
