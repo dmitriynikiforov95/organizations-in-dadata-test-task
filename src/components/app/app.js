@@ -1,14 +1,11 @@
 import React from "react";
 import { Route } from "react-router-dom";
-
+import { CSSTransition } from "react-transition-group";
+import AppHeader from "../app-header";
 import NavTabsContainer from "../../containers/nav-tabs-container";
 import OraganizationSearchPageContainer from "../../containers/pages-container/organizations-search-page-container";
 import SavedOrganizationsPageContainer from "../../containers/pages-container/saved-organizations-page-container";
-import AppHeader from "../app-header";
-
 import "./app.css";
-
-import { CSSTransition } from "react-transition-group";
 
 const App = () => {
   const routes = [

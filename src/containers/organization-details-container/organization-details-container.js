@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-
 import { saveOrganization } from "../../actions/";
 import OrganizationDetails from "../../components/organization-details";
 
@@ -9,21 +8,20 @@ const OrganizationDetailsContainer = ({
   saveOrganization,
   savedOrganizations,
 }) => {
-  const isOrganizationAlreadySaved = savedOrganizations.find(
+  
+  const isOrgAlrdySaved = savedOrganizations.find(
     ({ data: { hid } }) => hid === organization.data.hid
-  )
-    ? true
-    : false;
+  );
     
   const [isOrganizationSaved, setIsOrganizationSavedValue] = useState(
-    isOrganizationAlreadySaved
+    isOrgAlrdySaved
   );
 
   useEffect(() => {
-    if (isOrganizationAlreadySaved) {
+    if (isOrgAlrdySaved) {
       setIsOrganizationSavedValue(true);
     }
-  }, [savedOrganizations, isOrganizationAlreadySaved]);
+  }, [savedOrganizations, isOrgAlrdySaved]);
 
   return (
     <OrganizationDetails

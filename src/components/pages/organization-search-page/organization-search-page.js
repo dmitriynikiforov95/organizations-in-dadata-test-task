@@ -1,5 +1,4 @@
 import React from "react";
-
 import SearchPanelContainer from "../../../containers/search-panel-container";
 
 const OraganizationSearchPage = ({

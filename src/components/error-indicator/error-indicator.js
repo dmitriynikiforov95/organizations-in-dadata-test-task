@@ -1,8 +1,7 @@
 import React from "react";
 import s from "./error-indicator.module.css";
 
-const ErrorIndicator = () => {
-  return (
+const ErrorIndicator = () => (
     <div className={s.messageWrapper}>
       <p className={s.title}>Ошибка</p>
       <div>
@@ -11,6 +10,5 @@ const ErrorIndicator = () => {
       </div>
     </div>
   );
-};
 
 export default ErrorIndicator;

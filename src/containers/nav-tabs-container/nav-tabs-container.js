@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { useLocation } from 'react-router-dom';
-
 import NavTabs from "../../components/nav-tabs";
 
 const NavTabsContainer = ({ savedOrganizations }) => {

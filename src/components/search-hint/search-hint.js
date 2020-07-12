@@ -1,7 +1,7 @@
 import React from "react";
 import icon from "./search-hint-icon.png";
-import s from "./search-hint.module.css";
 import classNames from "classnames/bind";
+import s from "./search-hint.module.css";
 
 const SearchHint = ({
   isSearchResultEmpty,

@@ -1,10 +1,8 @@
 import React, { useContext } from "react";
 import { connect } from "react-redux";
-import { DadataApiServiceContext } from "../../components/dadata-api-service-context";
 import { changeQuery, fetchOrganizations } from "../../actions";
-
 import useEffectOnlyOnUpdate from "../../helpers";
-
+import { DadataApiServiceContext } from "../../components/dadata-api-service-context";
 import SearchPanel from "../../components/search-panel";
 
 const SearchPanelContainer = ({

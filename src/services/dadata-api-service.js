@@ -1,6 +1,5 @@
 export default class DadataApiService {
-
-    _apiBase =
+  _apiBase =
     "https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/party";
 
   async getResource(query) {
@@ -9,9 +8,9 @@ export default class DadataApiService {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: "Token 73ba661ebb7513208c7da38e014275266e068676"
+        Authorization: "Token 73ba661ebb7513208c7da38e014275266e068676",
       },
-      body: JSON.stringify(query)
+      body: JSON.stringify(query),
     });
 
     if (!res.ok) {

@@ -1,6 +1,6 @@
 import React from "react";
-import s from "./search-panel.module.css";
 import { DebounceInput } from "react-debounce-input";
+import s from "./search-panel.module.css";
 
 const SearchPanel = ({ query, changeQuery, searchPanelRef }) => (
   <div>

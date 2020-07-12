@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-
 import { removeOrganization, getОrganizationDetails } from "../../actions";
-
 import OrganizationListItem from "../../components/organization-list-item";
 
 const OrganizationListItemContaniner = ({

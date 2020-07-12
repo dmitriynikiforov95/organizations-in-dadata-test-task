@@ -1,0 +1,11 @@
+.detailWrapper {
+  margin: 0;
+  margin-bottom: 5px;
+  font-size: 12px;
+  line-height: 188.55%;
+}
+
+.detailName {
+  margin-right: 5px;
+  color: #777777;
+}
